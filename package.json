@@ -1,0 +1,47 @@
+{
+  "name": "API-rest---Enmedio",
+  "version": "1.0.0",
+  "description": "Ejercicio para el desarrollo de una API rest que permita administrar los procesos de compra y venta.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "npx nodemon src/index.ts",
+    "dev-d": "npm install --only=prod",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "html": "copyfiles --up 1 src/public/*.html ./dist",
+    "img-png": "copyfiles --up 1 src/public/assets/img/*.png ./dist",
+    "img-jpg": "copyfiles --up 1 src/public/assets/img/*.jpg ./dist",
+    "img-webp": "copyfiles --up 1 src/public/assets/img/*.webp ./dist",
+    "environments": "copyfiles --up 1 src/.env ./dist",
+    "remove-dist": "rm -rf dist/",
+    "package": "copyfiles package.json ./dist",
+    "build": "npm run remove-dist && tsc && npm run html && npm run img-png && npm run img-jpg && npm run img-webp && npm run package"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jscepedesg/API-rest---Enmedio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jscepedesg/API-rest---Enmedio/issues"
+  },
+  "homepage": "https://github.com/jscepedesg/API-rest---Enmedio#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/log4js": "^2.3.5",
+    "@types/mongoose": "^5.10.5",
+    "@types/morgan": "^1.9.2",
+    "@types/node": "^15.0.0",
+    "@types/underscore": "^1.11.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "log4js": "^6.3.0",
+    "mongoose": "^5.12.5",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "underscore": "^1.13.1"
+  }
+}
