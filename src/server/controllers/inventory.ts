@@ -1,23 +1,22 @@
 import { Router, Request, Response } from 'express';
 import _ = require('underscore');
-import Article from '../models/article';
-const CArticle = Router();
+import Inventory from '../models/inventory';
+const CInventory = Router();
 
 /**
- * @description Method for creating article.
+ * @description Method for creating inventory.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.post( '/article', ( req: Request, res: Response ) => {
+CInventory.post( '/inventory', ( req: Request, res: Response ) => {
     let body = req.body;
 
-    let article = new Article({
-        name: body.name,
-        price: body.price,
-        image: body.image
+    let inventory = new Inventory({
+        article_id: body.article_id,
+        quantity: body.quantity
     });
 
-    article.save((err: any, articleDB: any) => {
+    inventory.save((err: any, inventoryDB: any) => {
         if(err){
             return res.status(400).json({
                 ok: false,
@@ -26,27 +25,28 @@ CArticle.post( '/article', ( req: Request, res: Response ) => {
         }
         res.json({
             ok: true,
-            article: articleDB
+            inventory: inventoryDB
         });
     });
 });
 
 /**
- * @description Method to get all article.
+ * @description Method to get all inventory.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.get( '/article', ( req: Request, res: Response ) => {
+CInventory.get( '/inventory', ( req: Request, res: Response ) => {
     let from = req.query.from || 0;
     from = Number(from);
 
     let limit = req.query.limit || 15;
     limit = Number(limit);
 
-    Article.find({state: true})
+    Inventory.find({state: true})
             .skip(from)
             .limit(limit)
-            .exec((err, article) => {
+            .populate('article_id', 'name')
+            .exec((err, inventory) => {
                 if(err) {
                     return res.status(400).json({
                         ok: false,
@@ -54,10 +54,10 @@ CArticle.get( '/article', ( req: Request, res: Response ) => {
                     });
                 }
 
-                Article.countDocuments({state: true}, (err, count) => {
+                Inventory.countDocuments({state: true}, (err, count) => {
                     res.json({
                         ok: true,
-                        article,
+                        inventory,
                         howMany: count
                     });
                 });
@@ -65,41 +65,43 @@ CArticle.get( '/article', ( req: Request, res: Response ) => {
 });
 
 /**
- * @description Method to article by id.
+ * @description Method to inventory by id.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.get( '/article/:id', ( req: Request, res: Response ) => {
+CInventory.get( '/inventory/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
     if(id == null)
     {
-        return res.status(404).json({message: "Error article doesn't exist"});
+        return res.status(404).json({message: "Error inventory doesn't exist"});
     }
 
-        Article.findById(id, (err: any, article: any) => {
+        Inventory.findById(id)
+                .populate('article_id', 'name')
+                .exec((err: any, inventory: any) => {
 
             if(err) {return res.status(500).json({message: 'Error returning data'});}
 
-            if(! article ) return res.status(404).json({message: "Error article doesn't exist"});
+            if(! inventory ) return res.status(404).json({message: "Error inventory doesn't exist"});
 
             return res.status(200).json({
                 ok: true,
-                article
+                inventory
             });
 
         });
 });
 
 /**
- * @description Method that updates the attributes of a article.
+ * @description Method that updates the attributes of a inventory.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.put( '/article/:id', ( req: Request, res: Response ) => {
+CInventory.put( '/inventory/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
-    let body =_.pick( req.body, ['name', 'price', 'image', 'state']);
+    let body =_.pick( req.body, ['article_id', 'quantity', 'state']);
 
-    Article.findByIdAndUpdate( id, body, {new: true, runValidators: false}, (err, articleDB) => {
+    Inventory.findByIdAndUpdate( id, body, {new: true, runValidators: false}, (err, inventoryDB) => {
 
         if(err) {
             return res.status(400).json({
@@ -108,46 +110,46 @@ CArticle.put( '/article/:id', ( req: Request, res: Response ) => {
             });
         }
 
-        if(! articleDB) return res.status(404).json({message: "Error article doesn't exist"});
+        if(! inventoryDB) return res.status(404).json({message: "Error inventory doesn't exist"});
 
         res.json({
             ok: true,
-            article: articleDB
+            inventory: inventoryDB
         });
     });
 });
 
 /**
- * @description Method that delete a article.
+ * @description Method that delete a inventory.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.delete( '/article/:id', ( req: Request, res: Response ) => {
+CInventory.delete( '/inventory/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
 
     let changeState = {
         state: false
     };
-    Article.findByIdAndUpdate( id, changeState, {new: true}, (err, articleDelete) => {
+    Inventory.findByIdAndUpdate( id, changeState, {new: true}, (err, inventoryDelete) => {
             if(err) {
                 return res.status(400).json({
                     ok: false,
                     err
                 });
             }
-            if(articleDelete === null){
+            if(inventoryDelete === null){
                 return res.status(400).json({
                     ok: false,
                     err: {
-                        message: 'article not found'
+                        message: 'inventory not found'
                     }
                 });
             }
             res.json({
                 ok: true,
-                article: articleDelete
+                inventory: inventoryDelete
             });
     });
 });
 
-export default CArticle;
+export default CInventory;

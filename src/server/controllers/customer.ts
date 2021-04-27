@@ -1,23 +1,24 @@
 import { Router, Request, Response } from 'express';
 import _ = require('underscore');
-import Article from '../models/article';
-const CArticle = Router();
+import Customer from '../models/customer';
+const CCustomer = Router();
 
 /**
- * @description Method for creating article.
+ * @description Method for creating customer.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.post( '/article', ( req: Request, res: Response ) => {
+CCustomer.post( '/customer', ( req: Request, res: Response ) => {
     let body = req.body;
 
-    let article = new Article({
-        name: body.name,
-        price: body.price,
-        image: body.image
+    let customer = new Customer({
+        firstname: body.firstname,
+        lastname: body.lastname,
+        phone: body.phone,
+        email: body.email
     });
 
-    article.save((err: any, articleDB: any) => {
+    customer.save((err: any, customerDB: any) => {
         if(err){
             return res.status(400).json({
                 ok: false,
@@ -26,27 +27,27 @@ CArticle.post( '/article', ( req: Request, res: Response ) => {
         }
         res.json({
             ok: true,
-            article: articleDB
+            customer: customerDB
         });
     });
 });
 
 /**
- * @description Method to get all article.
+ * @description Method to get all customer.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.get( '/article', ( req: Request, res: Response ) => {
+CCustomer.get( '/customer', ( req: Request, res: Response ) => {
     let from = req.query.from || 0;
     from = Number(from);
 
     let limit = req.query.limit || 15;
     limit = Number(limit);
 
-    Article.find({state: true})
+    Customer.find({state: true})
             .skip(from)
             .limit(limit)
-            .exec((err, article) => {
+            .exec((err, customer) => {
                 if(err) {
                     return res.status(400).json({
                         ok: false,
@@ -54,10 +55,10 @@ CArticle.get( '/article', ( req: Request, res: Response ) => {
                     });
                 }
 
-                Article.countDocuments({state: true}, (err, count) => {
+                Customer.countDocuments({state: true}, (err, count) => {
                     res.json({
                         ok: true,
-                        article,
+                        customer,
                         howMany: count
                     });
                 });
@@ -65,41 +66,41 @@ CArticle.get( '/article', ( req: Request, res: Response ) => {
 });
 
 /**
- * @description Method to article by id.
+ * @description Method to customer by id.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.get( '/article/:id', ( req: Request, res: Response ) => {
+CCustomer.get( '/customer/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
     if(id == null)
     {
-        return res.status(404).json({message: "Error article doesn't exist"});
+        return res.status(404).json({message: "Error customer doesn't exist"});
     }
 
-        Article.findById(id, (err: any, article: any) => {
+        Customer.findById(id, (err: any, customer: any) => {
 
             if(err) {return res.status(500).json({message: 'Error returning data'});}
 
-            if(! article ) return res.status(404).json({message: "Error article doesn't exist"});
+            if(! customer ) return res.status(404).json({message: "Error customer doesn't exist"});
 
             return res.status(200).json({
                 ok: true,
-                article
+                customer
             });
 
         });
 });
 
 /**
- * @description Method that updates the attributes of a article.
+ * @description Method that updates the attributes of a customer.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.put( '/article/:id', ( req: Request, res: Response ) => {
+CCustomer.put( '/customer/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
-    let body =_.pick( req.body, ['name', 'price', 'image', 'state']);
+    let body =_.pick( req.body, ['firstname', 'lastname', 'phone', 'email', 'state']);
 
-    Article.findByIdAndUpdate( id, body, {new: true, runValidators: false}, (err, articleDB) => {
+    Customer.findByIdAndUpdate( id, body, {new: true, runValidators: false}, (err, customerDB) => {
 
         if(err) {
             return res.status(400).json({
@@ -108,46 +109,46 @@ CArticle.put( '/article/:id', ( req: Request, res: Response ) => {
             });
         }
 
-        if(! articleDB) return res.status(404).json({message: "Error article doesn't exist"});
+        if(! customerDB) return res.status(404).json({message: "Error customer doesn't exist"});
 
         res.json({
             ok: true,
-            article: articleDB
+            customer: customerDB
         });
     });
 });
 
 /**
- * @description Method that delete a article.
+ * @description Method that delete a customer.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.delete( '/article/:id', ( req: Request, res: Response ) => {
+CCustomer.delete( '/customer/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
 
     let changeState = {
         state: false
     };
-    Article.findByIdAndUpdate( id, changeState, {new: true}, (err, articleDelete) => {
+    Customer.findByIdAndUpdate( id, changeState, {new: true}, (err, customerDelete) => {
             if(err) {
                 return res.status(400).json({
                     ok: false,
                     err
                 });
             }
-            if(articleDelete === null){
+            if(customerDelete === null){
                 return res.status(400).json({
                     ok: false,
                     err: {
-                        message: 'article not found'
+                        message: 'customer not found'
                     }
                 });
             }
             res.json({
                 ok: true,
-                article: articleDelete
+                customer: customerDelete
             });
     });
 });
 
-export default CArticle;
+export default CCustomer;

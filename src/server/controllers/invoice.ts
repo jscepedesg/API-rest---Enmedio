@@ -1,23 +1,22 @@
 import { Router, Request, Response } from 'express';
 import _ = require('underscore');
-import Article from '../models/article';
-const CArticle = Router();
+import Invoice from '../models/invoice';
+const CInvoice = Router();
 
 /**
- * @description Method for creating article.
+ * @description Method for creating invoice.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.post( '/article', ( req: Request, res: Response ) => {
+CInvoice.post( '/invoice', ( req: Request, res: Response ) => {
     let body = req.body;
 
-    let article = new Article({
-        name: body.name,
-        price: body.price,
-        image: body.image
+    let invoice = new Invoice({
+        customer_id: body.customer_id,
+        date: body.date
     });
 
-    article.save((err: any, articleDB: any) => {
+    invoice.save((err: any, invoiceDB: any) => {
         if(err){
             return res.status(400).json({
                 ok: false,
@@ -26,27 +25,27 @@ CArticle.post( '/article', ( req: Request, res: Response ) => {
         }
         res.json({
             ok: true,
-            article: articleDB
+            invoice: invoiceDB
         });
     });
 });
 
 /**
- * @description Method to get all article.
+ * @description Method to get all invoice.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.get( '/article', ( req: Request, res: Response ) => {
+CInvoice.get( '/invoice', ( req: Request, res: Response ) => {
     let from = req.query.from || 0;
     from = Number(from);
 
     let limit = req.query.limit || 15;
     limit = Number(limit);
 
-    Article.find({state: true})
+    Invoice.find({state: true})
             .skip(from)
             .limit(limit)
-            .exec((err, article) => {
+            .exec((err, invoice) => {
                 if(err) {
                     return res.status(400).json({
                         ok: false,
@@ -54,10 +53,10 @@ CArticle.get( '/article', ( req: Request, res: Response ) => {
                     });
                 }
 
-                Article.countDocuments({state: true}, (err, count) => {
+                Invoice.countDocuments({state: true}, (err, count) => {
                     res.json({
                         ok: true,
-                        article,
+                        invoice,
                         howMany: count
                     });
                 });
@@ -65,41 +64,41 @@ CArticle.get( '/article', ( req: Request, res: Response ) => {
 });
 
 /**
- * @description Method to article by id.
+ * @description Method to invoice by id.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.get( '/article/:id', ( req: Request, res: Response ) => {
+CInvoice.get( '/invoice/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
     if(id == null)
     {
-        return res.status(404).json({message: "Error article doesn't exist"});
+        return res.status(404).json({message: "Error invoice doesn't exist"});
     }
 
-        Article.findById(id, (err: any, article: any) => {
+        Invoice.findById(id, (err: any, invoice: any) => {
 
             if(err) {return res.status(500).json({message: 'Error returning data'});}
 
-            if(! article ) return res.status(404).json({message: "Error article doesn't exist"});
+            if(! invoice ) return res.status(404).json({message: "Error invoice doesn't exist"});
 
             return res.status(200).json({
                 ok: true,
-                article
+                invoice
             });
 
         });
 });
 
 /**
- * @description Method that updates the attributes of a article.
+ * @description Method that updates the attributes of a invoice.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.put( '/article/:id', ( req: Request, res: Response ) => {
+CInvoice.put( '/invoice/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
-    let body =_.pick( req.body, ['name', 'price', 'image', 'state']);
+    let body =_.pick( req.body, ['customer_id', 'date', 'state']);
 
-    Article.findByIdAndUpdate( id, body, {new: true, runValidators: false}, (err, articleDB) => {
+    Invoice.findByIdAndUpdate( id, body, {new: true, runValidators: false}, (err, invoiceDB) => {
 
         if(err) {
             return res.status(400).json({
@@ -108,46 +107,46 @@ CArticle.put( '/article/:id', ( req: Request, res: Response ) => {
             });
         }
 
-        if(! articleDB) return res.status(404).json({message: "Error article doesn't exist"});
+        if(! invoiceDB) return res.status(404).json({message: "Error invoice doesn't exist"});
 
         res.json({
             ok: true,
-            article: articleDB
+            invoice: invoiceDB
         });
     });
 });
 
 /**
- * @description Method that delete a article.
+ * @description Method that delete a invoice.
  * @author jsCespedesg
  * @version 1.0.0
  */
-CArticle.delete( '/article/:id', ( req: Request, res: Response ) => {
+CInvoice.delete( '/invoice/:id', ( req: Request, res: Response ) => {
     let id = req.params.id;
 
     let changeState = {
         state: false
     };
-    Article.findByIdAndUpdate( id, changeState, {new: true}, (err, articleDelete) => {
+    Invoice.findByIdAndUpdate( id, changeState, {new: true}, (err, invoiceDelete) => {
             if(err) {
                 return res.status(400).json({
                     ok: false,
                     err
                 });
             }
-            if(articleDelete === null){
+            if(invoiceDelete === null){
                 return res.status(400).json({
                     ok: false,
                     err: {
-                        message: 'article not found'
+                        message: 'invoice not found'
                     }
                 });
             }
             res.json({
                 ok: true,
-                article: articleDelete
+                invoice: invoiceDelete
             });
     });
 });
 
-export default CArticle;
+export default CInvoice;
