@@ -178,4 +178,76 @@ CDetailInvoice.delete( '/detail_invoice/:id', ( req: Request, res: Response ) =>
     });
 });
 
+
+/**
+ * @description Method to get result Sales.
+ * @author sCespedes
+ * @version 1.0.0
+ */
+ CDetailInvoice.get('/total_sales', ( req: Request, res: Response ) => {
+    DetailInvoice.aggregate([
+        {
+            $group: {_id: '$article_id', "saleByArticle": {$sum: "$quantity"}}
+        }
+    ])
+    .exec((err, sales) => {
+
+        if(err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+        
+        res.status(200).json({
+            ok: true,
+            sales
+        });
+    });
+});
+
+
+/**
+ * @description Method to get result Sales.
+ * @author sCespedes
+ * @version 1.0.0
+ */
+ CDetailInvoice.get('/customer_buy_most', ( req: Request, res: Response ) => {
+    DetailInvoice.aggregate([
+        {
+            $match:{"invoice_id":{"$exists":true}}
+        },
+        {
+            $group: {_id: '$invoice_id', "quantity": {$sum: "$quantity"}}
+        },
+        {
+            $lookup: {from: 'invoices', localField: 'invoice_id', foreignField: '_id', as: 'invoice'}
+        },
+        // {
+        //     $unwind: "$invoice"
+        // },
+        // {
+        //     $project: {
+        //         _id: 1,
+        //         customer_id: "$invoice.customer_id",
+        //         total: "$saleByArticle"
+        //     }
+        // }
+    ])
+    .sort({"saleByArticle": -1})
+    .exec((err, sales) => {
+
+        if(err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+        
+        res.status(200).json({
+            ok: true,
+            sales
+        });
+    });
+});
 export default CDetailInvoice;

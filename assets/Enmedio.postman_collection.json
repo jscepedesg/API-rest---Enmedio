@@ -1,0 +1,785 @@
+{
+	"info": {
+		"_postman_id": "21f53bdc-2e0d-4153-9be0-5ddd80552bc3",
+		"name": "Enmedio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "Create Article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jabón de loza\",\r\n    \"price\": 3000,\r\n    \"image\": \"url\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Article By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article/608799508e8f38236c5ea616",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article",
+								"608799508e8f38236c5ea616"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Article By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 2000,\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article/608799508e8f38236c5ea616",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article",
+								"608799508e8f38236c5ea616"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article/608799508e8f38236c5ea616",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article",
+								"608799508e8f38236c5ea616"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Carlos\",\r\n    \"lastname\": \"Sanchez\",\r\n    \"phone\": \"3124657890\",\r\n    \"email\": \"carlos.sanchez@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/customer/6087f761f668363a64256086",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"customer",
+								"6087f761f668363a64256086"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Jose\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/customer/6087f761f668363a64256086",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"customer",
+								"6087f761f668363a64256086"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/customer/6087f761f668363a64256086",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"customer",
+								"6087f761f668363a64256086"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ArticleScore",
+			"item": [
+				{
+					"name": "Create ArticleScore",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"article_id\": \"608799508e8f38236c5ea616\",\r\n    \"customer_id\": \"6087f761f668363a64256086\",\r\n    \"score\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article_score",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article_score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All ArticleScore",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article_score",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article_score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ArticleScore By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article_score/6087f8d1f668363a64256088",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article_score",
+								"6087f8d1f668363a64256088"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update ArticleScore By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article_score/6087f8d1f668363a64256088",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article_score",
+								"6087f8d1f668363a64256088"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ArticleScore",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/article_score/6087f8d1f668363a64256088",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"article_score",
+								"6087f8d1f668363a64256088"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "Create Inventory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"article_id\": \"608799508e8f38236c5ea616\",\r\n    \"quantity\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/inventory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Inventory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/inventory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inventory By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/inventory/6087fd0cf668363a64256089",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"inventory",
+								"6087fd0cf668363a64256089"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Inventory By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/inventory/6087fd0cf668363a64256089",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"inventory",
+								"6087fd0cf668363a64256089"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Inventory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/inventory/6087fd0cf668363a64256089",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"inventory",
+								"6087fd0cf668363a64256089"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Create Invoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\": \"6087f761f668363a64256086\",\r\n    \"date\": \"Tue Apr 26 2021 17:13:51 GMT-0500 (hora estándar de Colombia)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/invoice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/invoice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/invoice/60880036c7438d330801f6b6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"invoice",
+								"60880036c7438d330801f6b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Invoice By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"Tue Apr 26 2021 18:13:51 GMT-0500 (hora estándar de Colombia)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/invoice/60880036c7438d330801f6b6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"invoice",
+								"60880036c7438d330801f6b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Invoice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/invoice/60880036c7438d330801f6b6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"invoice",
+								"60880036c7438d330801f6b6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DetailInvoice",
+			"item": [
+				{
+					"name": "Create DetailInvoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"article_id\": \"608799508e8f38236c5ea616\",\r\n    \"invoice_id\": \"60880036c7438d330801f6b6\",\r\n    \"quantity\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/detail_invoice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"detail_invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All DetailInvoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/detail_invoice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"detail_invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DetailInvoice By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/detail_invoice/608808287d11df07541011b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"detail_invoice",
+								"608808287d11df07541011b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update DetailInvoice By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enmedio/detail_invoice/608808287d11df07541011b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"detail_invoice",
+								"608808287d11df07541011b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete DetailInvoice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/detail_invoice/608808287d11df07541011b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"detail_invoice",
+								"608808287d11df07541011b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total Sales By Article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/enmedio/total_sales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enmedio",
+								"total_sales"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
